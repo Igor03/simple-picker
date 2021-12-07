@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JIgor.Projects.SimplePicker.Api", "src\JIgor.Projects.SimplePicker.Api\JIgor.Projects.SimplePicker.Api.csproj", "{B9306FDC-2BA8-4CE1-9597-201D1198EBCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EAFD7503-B7EB-4F36-9DB9-EA56F8DFE299}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DB02A1E6-3560-4035-896B-438DE5F51E5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIgor.Projects.SimplePicker.UnitTests", "tests\JIgor.Projects.SimplePicker.UnitTests\JIgor.Projects.SimplePicker.UnitTests.csproj", "{5FE31733-4079-496D-AD81-3ACABFE5654F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIgor.Projects.SimplePicker.Engine", "src\JIgor.Projects.SimplePicker.Engine\JIgor.Projects.SimplePicker.Engine.csproj", "{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9306FDC-2BA8-4CE1-9597-201D1198EBCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9306FDC-2BA8-4CE1-9597-201D1198EBCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9306FDC-2BA8-4CE1-9597-201D1198EBCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9306FDC-2BA8-4CE1-9597-201D1198EBCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FE31733-4079-496D-AD81-3ACABFE5654F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE31733-4079-496D-AD81-3ACABFE5654F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE31733-4079-496D-AD81-3ACABFE5654F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE31733-4079-496D-AD81-3ACABFE5654F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B9306FDC-2BA8-4CE1-9597-201D1198EBCC} = {EAFD7503-B7EB-4F36-9DB9-EA56F8DFE299}
+		{5FE31733-4079-496D-AD81-3ACABFE5654F} = {DB02A1E6-3560-4035-896B-438DE5F51E5B}
+		{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B} = {EAFD7503-B7EB-4F36-9DB9-EA56F8DFE299}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F378A71-22F7-4D92-8820-9265D789EE02}
+	EndGlobalSection
+EndGlobal
