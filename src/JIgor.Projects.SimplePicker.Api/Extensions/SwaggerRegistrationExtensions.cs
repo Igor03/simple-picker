@@ -21,7 +21,6 @@ namespace JIgor.Projects.SimplePicker.Api.Extensions
                 .AddSwaggerGen(options =>
                 {
                     options.OperationFilter<SwaggerDefaultValues>();
-                    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme());
                 });
         }
 
