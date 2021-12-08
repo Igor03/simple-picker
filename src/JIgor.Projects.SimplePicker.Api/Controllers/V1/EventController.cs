@@ -2,8 +2,9 @@
 using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Data.Contracts;
-using JIgor.Projects.SimplePicker.Api.Entities;
+using JIgor.Projects.SimplePicker.Api.Dtos;
+using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
+using MediatR;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
@@ -13,31 +14,33 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly IEventRepository _eventRepository;
-        private readonly ISimplePickerDatabaseContext _simplePickerDatabaseContext;
+        private readonly IMediator _mediator;
 
-        public EventController(IEventRepository eventRepository, ISimplePickerDatabaseContext simplePickerDatabaseContext)
+        public EventController(IMediator mediator)
         {
-            _eventRepository = eventRepository;
-            _simplePickerDatabaseContext = simplePickerDatabaseContext;
+            _mediator = mediator;
         }
 
-        // GET: api/<EventController>
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpPost("Create")]
+        public async Task<IActionResult> CreateEvent([FromBody] CreateEventRequestDto @event)
         {
-            var @event = new Event()
-            {
-                Title = "My title",
-                StartDate = DateTime.Now,
-                DueDate = DateTime.Now.AddDays(1),
-                IsFinished = true,
-            };
+            _ = @event ?? throw new ArgumentNullException(nameof(@event));
 
-            await _eventRepository.CreateEventAsync(@event, CancellationToken.None).ConfigureAwait(false);
-            _ = await _simplePickerDatabaseContext.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+            var result = await _mediator
+                .Send(new CreateEventCommand(@event), CancellationToken.None)
+                .ConfigureAwait(false);
 
-            return Ok(@event.Id);
+            return Ok(result);
+        }
+
+        [HttpDelete("Finish")]
+        public async Task<IActionResult> FinishEvent([FromQuery] Guid eventId)
+        {
+            var result = await _mediator
+                .Send(new FinishEventCommand(eventId), CancellationToken.None)
+                .ConfigureAwait(false);
+
+            return Ok(result);
         }
     }
 }
