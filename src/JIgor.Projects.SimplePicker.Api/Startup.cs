@@ -22,7 +22,8 @@ namespace JIgor.Projects.SimplePicker.Api
         public void ConfigureServices(IServiceCollection services)
         {
             _ = services.AddControllers();
-            _ = services.AddCustomSwagger()
+            _ = services.AddDatabaseServices(Configuration)
+                .AddCustomSwagger()
                 .AddVersionedApiExplorer(options =>
                 {
                     options.GroupNameFormat = "'v'VVV";
