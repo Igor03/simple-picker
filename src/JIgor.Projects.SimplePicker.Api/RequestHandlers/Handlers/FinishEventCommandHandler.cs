@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using JIgor.Projects.SimplePicker.Api.Data.Contracts;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using MediatR;
+using OneOf;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FinishEventCommandResponse;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 {
-    public class FinishEventCommandHandler : IRequestHandler<FinishEventCommand, Guid>
+    public class FinishEventCommandHandler : IRequestHandler<FinishEventCommand, OneOf<Success, NotFound>>
     {
         private readonly IEventRepository _eventRepository;
         private readonly ISimplePickerDatabaseContext _simplePickerDatabaseContext;
@@ -18,7 +20,7 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
             _simplePickerDatabaseContext = simplePickerDatabaseContext;
         }
 
-        public async Task<Guid> Handle(FinishEventCommand request, CancellationToken cancellationToken)
+        public async Task<OneOf<Success, NotFound>> Handle(FinishEventCommand request, CancellationToken cancellationToken)
         {
             _ = request ?? throw new ArgumentNullException(nameof(request));
 
@@ -28,8 +30,8 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 
             if (@event is null)
             {
-                // OneOf treatment here
-                throw new Exception("Unable to find this event!");
+                return new NotFound($"Unable to finish the event {request.EventId} this event!" +
+                                    $" Maybe the event is already finished ot it never existed.");
             }
 
             @event.IsFinished = true;
@@ -38,7 +40,7 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
                 .SaveChangesAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            return @event.Id;
+            return new Success(@event.Id);
         }
     }
 }

@@ -62,7 +62,9 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
                 .Send(new FinishEventCommand(eventId), CancellationToken.None)
                 .ConfigureAwait(false);
 
-            return Ok(result);
+            return result.Match<IActionResult>(
+                success => Ok(success.EventId),
+                notFound => NotFound(notFound.Message));
         }
     }
 }
