@@ -29,7 +29,9 @@ namespace JIgor.Projects.SimplePicker.Api.Data.Repositories
 
         public async Task<Event> FindEventAsync(Guid eventId, CancellationToken cancellationToken)
         {
-            var @event = await _simplePickerDatabaseContext.Events.Where(p => p.Id == eventId && !p.IsFinished)
+            var @event = await _simplePickerDatabaseContext.Events
+                .Include(p => p.EventValues)
+                .Where(p => p.Id == eventId && !p.IsFinished)
                 .FirstOrDefaultAsync(cancellationToken)
                 .ConfigureAwait(false);
 

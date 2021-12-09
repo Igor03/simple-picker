@@ -6,10 +6,12 @@ using JIgor.Projects.SimplePicker.Api.Data.Contracts;
 using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using MediatR;
+using OneOf;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FindEventQueryHandlerResponse;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 {
-    public class FindEventQueryHandler : IRequestHandler<FindEventQuery, EventDto>
+    public class FindEventQueryHandler : IRequestHandler<FindEventQuery, OneOf<Success, NotFound>>
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
@@ -20,7 +22,7 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
             _mapper = mapper;
         }
 
-        public async Task<EventDto> Handle(FindEventQuery request, CancellationToken cancellationToken)
+        public async Task<OneOf<Success, NotFound>> Handle(FindEventQuery request, CancellationToken cancellationToken)
         {
             _ = request ?? throw new ArgumentNullException(nameof(request));
 
@@ -30,10 +32,10 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 
             if (eventEntity is null)
             {
-                throw new Exception("Either the event has been finished or it never existed");
+                return new NotFound("Either the event has been finished or it never existed");
             }
 
-            var @event = _mapper.Map<EventDto>(eventEntity);
+            var @event = new Success(_mapper.Map<EventDto>(eventEntity));
 
             return @event;
         }

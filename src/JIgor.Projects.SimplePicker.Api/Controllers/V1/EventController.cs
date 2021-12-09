@@ -38,7 +38,9 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
                 .Send(new FindEventQuery(eventId), CancellationToken.None)
                 .ConfigureAwait(false);
 
-            return Ok(result);
+            return result.Match<IActionResult>(
+                success => Ok(success.Event),
+                notFound => NotFound(notFound.Message));
         }
 
         [HttpPost("Create")]

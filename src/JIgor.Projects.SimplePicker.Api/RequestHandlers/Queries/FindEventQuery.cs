@@ -1,10 +1,12 @@
 ﻿using System;
-using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using MediatR;
+using OneOf;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FindEventQueryHandlerResponse;
+
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries
 {
-    public class FindEventQuery : IRequest<EventDto>
+    public class FindEventQuery : IRequest<OneOf<Success, NotFound>>
     {
         public FindEventQuery(Guid eventId)
         {
