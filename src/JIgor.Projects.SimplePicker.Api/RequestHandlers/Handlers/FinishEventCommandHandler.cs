@@ -26,10 +26,10 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
                 .FindEventAsync(request.EventId, cancellationToken)
                 .ConfigureAwait(false);
 
-            // OneOf treatment here
             if (@event is null)
             {
-                throw new ArgumentNullException(nameof(@event));
+                // OneOf treatment here
+                throw new Exception("Unable to find this event!");
             }
 
             @event.IsFinished = true;

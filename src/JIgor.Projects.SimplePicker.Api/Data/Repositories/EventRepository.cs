@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,11 +29,21 @@ namespace JIgor.Projects.SimplePicker.Api.Data.Repositories
 
         public async Task<Event> FindEventAsync(Guid eventId, CancellationToken cancellationToken)
         {
-            var @event = await _simplePickerDatabaseContext.Events.Where(p => p.Id == eventId)
+            var @event = await _simplePickerDatabaseContext.Events.Where(p => p.Id == eventId && !p.IsFinished)
                 .FirstOrDefaultAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             return @event;
+        }
+
+        public async Task<IEnumerable<Event>> FindEventsAsync(CancellationToken cancellationToken)
+        {
+            var events = await _simplePickerDatabaseContext
+                .Events.Include(p => p.EventValues)
+                .Where(p => !p.IsFinished)
+                .ToListAsync(cancellationToken).ConfigureAwait(false);
+
+            return events;
         }
     }
 }

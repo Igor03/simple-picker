@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
+using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using MediatR;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
 {
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -19,6 +19,26 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         public EventController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FindEvents()
+        {
+            var result = await _mediator
+                .Send(new FindEventsQuery(), CancellationToken.None)
+                .ConfigureAwait(false);
+
+            return Ok(result);
+        }
+
+        [HttpGet("{eventId}")]
+        public async Task<IActionResult> FindEvent(Guid eventId)
+        {
+            var result = await _mediator
+                .Send(new FindEventQuery(eventId), CancellationToken.None)
+                .ConfigureAwait(false);
+
+            return Ok(result);
         }
 
         [HttpPost("Create")]

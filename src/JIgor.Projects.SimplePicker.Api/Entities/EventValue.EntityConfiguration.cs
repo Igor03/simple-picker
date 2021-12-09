@@ -30,6 +30,9 @@ namespace JIgor.Projects.SimplePicker.Api.Entities
                     .HasColumnName("VALUE")
                     .HasColumnType("VARCHAR(MAX)")
                     .IsRequired();
+
+                _ = builder.HasOne<Event>().WithMany(p => p.EventValues)
+                    .HasForeignKey(p => p.EventId);
             }
         }
     }

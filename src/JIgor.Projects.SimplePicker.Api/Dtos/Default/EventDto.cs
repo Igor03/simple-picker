@@ -19,9 +19,9 @@ namespace JIgor.Projects.SimplePicker.Api.Dtos.Default
         {
         }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public DateTime StartDate { get; set; }
 
@@ -29,6 +29,6 @@ namespace JIgor.Projects.SimplePicker.Api.Dtos.Default
 
         public bool IsFinished { get; set; }
 
-        public IEnumerable<EventValueDto> EventValues { get; set; }
+        public IEnumerable<EventValueDto>? EventValues { get; set; }
     }
 }
