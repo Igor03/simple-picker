@@ -31,7 +31,7 @@ namespace JIgor.Projects.SimplePicker.Api.Data.Repositories
         {
             var @event = await _simplePickerDatabaseContext.Events
                 .Include(p => p.EventValues)
-                .Where(p => p.Id == eventId && !p.IsFinished)
+                .Where(p => p.Id == eventId && (!p.IsFinished && p.StartDate < p.DueDate))
                 .FirstOrDefaultAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -42,7 +42,7 @@ namespace JIgor.Projects.SimplePicker.Api.Data.Repositories
         {
             var events = await _simplePickerDatabaseContext
                 .Events.Include(p => p.EventValues)
-                .Where(p => !p.IsFinished)
+                .Where(p => !p.IsFinished && p.StartDate < p.DueDate)
                 .ToListAsync(cancellationToken).ConfigureAwait(false);
 
             return events;
