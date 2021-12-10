@@ -29,7 +29,8 @@ namespace JIgor.Projects.SimplePicker.Api.Extensions
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
-                .AddTransient<IEventRepository, EventRepository>();
+                .AddTransient<IEventRepository, EventRepository>()
+                .AddTransient<IEventValueRepository, EventValueRepository>();
         }
     }
 }
