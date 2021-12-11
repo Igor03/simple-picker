@@ -10,7 +10,6 @@ namespace JIgor.Projects.SimplePicker.Api.Data.Contracts
     {
         Task AttachValuesAsync(IEnumerable<EventValue> eventValues, CancellationToken cancellationToken);
 
-
         Task<IEnumerable<EventValue>> FindEventValues(Guid eventId, CancellationToken cancellationToken);
     }
 }

@@ -45,9 +45,14 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
             }
 
             var removedValues = ListPicker
-                .PickElements(@event.EventValues!.ToList(), request.NumberOfPicks);
+                .PickElements(@event.EventValues!.ToList(), request.NumberOfPicks, p => !p.IsPicked);
 
-            MarkAsPicked(@event.EventValues, removedValues.Select(p => p.EventId));
+            // If there isn't any unpicked values
+            // TODO: maybe move this to a database trigger
+            if (!MarkAsPicked(@event.EventValues!, removedValues.Select(p => p.EventId)))
+            {
+                @event.IsFinished = true;
+            }
 
             await _simplePickerDatabaseContext
                 .SaveChangesAsync(cancellationToken)
@@ -56,14 +61,20 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
             return _mapper.Map<IEnumerable<EventValueDto>>(removedValues);
         }
 
-        private static void MarkAsPicked(IEnumerable<EventValue> eventValues, IEnumerable<Guid> pickedValuesIds)
+        private static bool MarkAsPicked(IEnumerable<EventValue> eventValues, IEnumerable<Guid> pickedValuesIds)
         {
             var pickedValuesCounter = 0;
             var totalValuesToPick = pickedValuesIds.Count();
 
+            // Checking if there is any pickable value
+            if (!pickedValuesIds.Any())
+            {
+                return false;
+            }
+
             foreach (var value in eventValues)
             {
-                if (pickedValuesIds.Contains(value.EventId))
+                if (pickedValuesIds.Contains(value.EventId) && !value.IsPicked)
                 {
                     value.IsPicked = true;
                     pickedValuesCounter += 1;
@@ -71,9 +82,11 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 
                 if (pickedValuesCounter == totalValuesToPick)
                 {
-                    return;
+                    return true;
                 }
             }
+
+            return false;
         }
     }
 }
