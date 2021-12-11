@@ -35,5 +35,17 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
                 success => Ok(success.EventId),
                 notFound => NotFound(notFound.Message));
         }
+
+
+        [HttpPost("PickValue/{eventId}")]
+        public async Task<IActionResult> CreateEventValue(Guid eventId, [FromQuery] int numberOfPicks = 1)
+        {
+
+            var result = await _mediator
+                .Send(new PickValueCommand(eventId, numberOfPicks), CancellationToken.None)
+                .ConfigureAwait(false);
+
+            return Ok(result);
+        }
     }
 }

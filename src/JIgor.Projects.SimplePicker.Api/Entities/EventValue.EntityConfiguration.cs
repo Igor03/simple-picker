@@ -25,10 +25,14 @@ namespace JIgor.Projects.SimplePicker.Api.Entities
                     .HasColumnType("UNIQUEIDENTIFIER")
                     .IsRequired();
 
-
                 _ = builder.Property(p => p.Value)
                     .HasColumnName("VALUE")
                     .HasColumnType("VARCHAR(MAX)")
+                    .IsRequired();
+
+                _ = builder.Property(p => p.IsPicked)
+                    .HasColumnName("IS_PICKED")
+                    .HasColumnType("BIT")
                     .IsRequired();
 
                 _ = builder.HasOne<Event>().WithMany(p => p.EventValues)

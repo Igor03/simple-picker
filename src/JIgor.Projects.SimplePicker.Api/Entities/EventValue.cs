@@ -4,11 +4,12 @@ namespace JIgor.Projects.SimplePicker.Api.Entities
 {
     public partial class EventValue
     {
-        public EventValue(Guid id, Guid eventId, string value)
+        public EventValue(Guid id, Guid eventId, string? value, bool isPicked)
         {
             Id = id;
             EventId = eventId;
             Value = value;
+            IsPicked = isPicked;
         }
 
         public EventValue()
@@ -20,5 +21,7 @@ namespace JIgor.Projects.SimplePicker.Api.Entities
         public Guid EventId { get; set; }
         
         public string? Value { get; set; }
+
+        public bool IsPicked { get; set; }
     }
 }

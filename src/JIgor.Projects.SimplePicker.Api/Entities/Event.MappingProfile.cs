@@ -10,6 +10,10 @@ namespace JIgor.Projects.SimplePicker.Api.Entities
         {
             public MappingProfile()
             {
+                // Default map
+                _ = CreateMap<Event, Event>()
+                    .ReverseMap();
+
                 _ = CreateMap<EventDto, Event>()
                     .ReverseMap();
 
