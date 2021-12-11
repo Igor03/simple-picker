@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using JIgor.Projects.SimplePicker.Api.Dtos.Default;
+using JIgor.Projects.SimplePicker.Api.Dtos;
 using MediatR;
 using OneOf;
 using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.AttachEventValueCommandResponses;

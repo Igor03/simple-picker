@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using JIgor.Projects.SimplePicker.Api.Data.Contracts;
+using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 using JIgor.Projects.SimplePicker.Api.Entities;
-using Microsoft.EntityFrameworkCore;
 
-namespace JIgor.Projects.SimplePicker.Api.Data.Repositories
+namespace JIgor.Projects.SimplePicker.Api.Database.Repositories
 {
     public class EventValueRepository : IEventValueRepository
     {

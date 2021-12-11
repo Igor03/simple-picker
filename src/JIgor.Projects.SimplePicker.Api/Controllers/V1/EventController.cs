@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Dtos.Default;
+using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using MediatR;

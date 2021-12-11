@@ -1,6 +1,6 @@
-﻿namespace JIgor.Projects.SimplePicker.Api.Dtos.Default
+﻿namespace JIgor.Projects.SimplePicker.Api.Dtos
 {
-    public class EventValueDto
+    public partial class EventValueDto
     {
         public EventValueDto(string value)
         {

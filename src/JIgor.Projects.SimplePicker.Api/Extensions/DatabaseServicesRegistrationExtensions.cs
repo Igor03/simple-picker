@@ -1,6 +1,7 @@
 ﻿using JIgor.Projects.SimplePicker.Api.Data.Contracts;
-using JIgor.Projects.SimplePicker.Api.Data.DataContexts;
-using JIgor.Projects.SimplePicker.Api.Data.Repositories;
+using JIgor.Projects.SimplePicker.Api.Database.Contracts;
+using JIgor.Projects.SimplePicker.Api.Database.DataContexts;
+using JIgor.Projects.SimplePicker.Api.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

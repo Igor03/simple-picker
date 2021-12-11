@@ -7,7 +7,7 @@ using JIgor.Projects.SimplePicker.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace JIgor.Projects.SimplePicker.Api.Data.DataContexts
+namespace JIgor.Projects.SimplePicker.Api.Database.DataContexts
 {
     public sealed class SimplePickerDatabaseContext : DbContext, ISimplePickerDatabaseContext
     {

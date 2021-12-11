@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JIgor.Projects.SimplePicker.Api.Dtos.Default
+namespace JIgor.Projects.SimplePicker.Api.Dtos
 {
-    public class EventDto
+    public partial class EventDto
     {
         public EventDto(string? title, 
             string? description, 

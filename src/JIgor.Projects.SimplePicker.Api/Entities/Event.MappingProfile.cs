@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using JIgor.Projects.SimplePicker.Api.Dtos.Default;
+using JIgor.Projects.SimplePicker.Api.Dtos;
 
 namespace JIgor.Projects.SimplePicker.Api.Entities
 {

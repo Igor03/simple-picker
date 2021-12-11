@@ -36,7 +36,8 @@ namespace JIgor.Projects.SimplePicker.Api
                     options.AssumeDefaultVersionWhenUnspecified = true;
                 })
                 .AddMappingProfiles()
-                .AddRequestHandlers();
+                .AddRequestHandlers()
+                .AddRequestValidators();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
