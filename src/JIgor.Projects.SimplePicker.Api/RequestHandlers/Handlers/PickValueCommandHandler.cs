@@ -9,6 +9,7 @@ using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using JIgor.Projects.SimplePicker.Api.Entities;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using MediatR;
+using JIgor.Projects.SimplePicker.Engine;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 {
@@ -43,8 +44,7 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
                 throw new Exception("Either the event is already finished or it never existed!");
             }
 
-            var listPicker = new ListPicker.ListPicker();
-            var removedValues = listPicker
+            var removedValues = ListPicker
                 .PickElements(@event.EventValues!.ToList(), request.NumberOfPicks);
 
             MarkAsPicked(@event.EventValues, removedValues.Select(p => p.EventId));
