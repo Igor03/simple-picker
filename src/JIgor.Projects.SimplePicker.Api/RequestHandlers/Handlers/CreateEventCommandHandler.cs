@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -27,6 +28,11 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
         public async Task<Guid> Handle(CreateEventCommand request, CancellationToken cancellationToken)
         {
             _ = request ?? throw new ArgumentNullException(nameof(request));
+
+            if (!request.Event.EventValues.Any())
+            {
+                throw new Exception("You need to have, at least, one value attached in order to create an event.");
+            }
 
             var @event = _mapper.Map<Event>(request.Event);
 

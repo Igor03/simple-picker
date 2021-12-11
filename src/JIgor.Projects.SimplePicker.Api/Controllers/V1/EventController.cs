@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Dtos;
+using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using MediatR;
@@ -31,7 +32,7 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
             return Ok(result);
         }
 
-        [HttpGet("{eventId}")]
+        [HttpGet("{eventId:guid}")]
         public async Task<IActionResult> FindEvent(Guid eventId)
         {
             var result = await _mediator
@@ -44,12 +45,36 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> CreateEvent([FromBody] CreateEventRequestDto @event)
+        public async Task<IActionResult> CreateEvent([FromBody] EventDto @event)
         {
             _ = @event ?? throw new ArgumentNullException(nameof(@event));
 
             var result = await _mediator
                 .Send(new CreateEventCommand(@event), CancellationToken.None)
+                .ConfigureAwait(false);
+
+            return Ok(result);
+        }
+
+        [HttpPost("Attach/{eventId:guid}")]
+        public async Task<IActionResult> CreateEventValue(Guid eventId, [FromBody] IEnumerable<EventValueDto> eventValues)
+        {
+            _ = eventValues ?? throw new ArgumentNullException(nameof(eventValues));
+
+            var result = await _mediator
+                .Send(new AttachEventValueCommand(eventId, eventValues), CancellationToken.None)
+                .ConfigureAwait(false);
+
+            return result.Match<IActionResult>(
+                success => Ok(success.EventId),
+                notFound => NotFound(notFound.Message));
+        }
+
+        [HttpPost("Pick/{eventId:guid}")]
+        public async Task<IActionResult> CreateEventValue(Guid eventId, [FromQuery] int numberOfPicks = 1)
+        {
+            var result = await _mediator
+                .Send(new PickValueCommand(eventId, numberOfPicks), CancellationToken.None)
                 .ConfigureAwait(false);
 
             return Ok(result);

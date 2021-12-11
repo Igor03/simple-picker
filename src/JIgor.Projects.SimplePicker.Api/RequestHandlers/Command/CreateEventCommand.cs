@@ -1,16 +1,16 @@
 ﻿using System;
-using JIgor.Projects.SimplePicker.Api.Dtos;
+using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using MediatR;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Command
 {
     public class CreateEventCommand : IRequest<Guid>
     {
-        public CreateEventCommand(CreateEventRequestDto @event)
+        public CreateEventCommand(EventDto @event)
         {
             Event = @event;
         }
 
-        public CreateEventRequestDto Event { get; set; }
+        public EventDto Event { get; set; }
     }
 }

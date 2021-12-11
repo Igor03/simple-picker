@@ -5,13 +5,16 @@ namespace JIgor.Projects.SimplePicker.Api.Dtos.Default
 {
     public class EventDto
     {
-        public EventDto(string title, string description, DateTime startDate, DateTime dueDate, bool isFinished, IEnumerable<EventValueDto> eventValues)
+        public EventDto(string? title, 
+            string? description, 
+            DateTime startDate, 
+            DateTime dueDate, 
+            IEnumerable<EventValueDto>? eventValues)
         {
             Title = title;
             Description = description;
             StartDate = startDate;
             DueDate = dueDate;
-            IsFinished = isFinished;
             EventValues = eventValues;
         }
 
@@ -26,8 +29,6 @@ namespace JIgor.Projects.SimplePicker.Api.Dtos.Default
         public DateTime StartDate { get; set; }
 
         public DateTime DueDate { get; set; }
-
-        public bool IsFinished { get; set; }
 
         public IEnumerable<EventValueDto>? EventValues { get; set; }
     }
