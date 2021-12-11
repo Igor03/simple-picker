@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using MediatR;
 using OneOf;
-using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.AttachEventValueCommandResponse;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.AttachEventValueCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Command
 {

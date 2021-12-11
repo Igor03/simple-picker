@@ -2,7 +2,7 @@
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses
 {
-    public partial class FindEventQueryHandlerResponse
+    public partial class FindEventQueryResponses
     {
         public readonly struct Success
         {

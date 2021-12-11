@@ -1,15 +1,15 @@
 ﻿namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses
 {
-    public partial class FinishEventCommandResponse
+    public partial class FindEventQueryResponses
     {
-        public readonly struct NotFound
+        public struct NotFound
         {
             public NotFound(string message)
             {
                 Message = message;
             }
 
-            public string Message { get; }
+            public string Message { get; set; }
         }
     }
 }

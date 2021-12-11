@@ -5,7 +5,7 @@ using JIgor.Projects.SimplePicker.Api.Data.Contracts;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using MediatR;
 using OneOf;
-using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FinishEventCommandResponse;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FinishEventCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 {

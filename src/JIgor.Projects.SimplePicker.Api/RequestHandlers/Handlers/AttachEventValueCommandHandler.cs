@@ -9,7 +9,7 @@ using JIgor.Projects.SimplePicker.Api.Entities;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using MediatR;
 using OneOf;
-using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.AttachEventValueCommandResponse;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.AttachEventValueCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 {

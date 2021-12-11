@@ -1,6 +1,6 @@
 ﻿namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses
 {
-    public partial class AttachEventValueCommandResponse
+    public partial class FinishEventCommandResponses
     {
         public readonly struct NotFound
         {

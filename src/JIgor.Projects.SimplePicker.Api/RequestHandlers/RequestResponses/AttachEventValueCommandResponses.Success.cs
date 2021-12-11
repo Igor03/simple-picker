@@ -2,7 +2,7 @@
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses
 {
-    public partial class AttachEventValueCommandResponse
+    public partial class AttachEventValueCommandResponses
     {
         public readonly struct Success
         {

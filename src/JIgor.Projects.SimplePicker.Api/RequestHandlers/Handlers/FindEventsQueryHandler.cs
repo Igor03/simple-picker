@@ -8,7 +8,7 @@ using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using MediatR;
 using OneOf;
-using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FindEventsQueryHandlerResponse;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FindEventsQueryResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 {

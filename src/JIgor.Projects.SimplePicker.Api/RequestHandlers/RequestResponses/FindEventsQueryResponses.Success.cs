@@ -3,7 +3,7 @@ using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses
 {
-    public partial class FindEventsQueryHandlerResponse
+    public partial class FindEventsQueryResponses
     {
         public struct Success
         {
