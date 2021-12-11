@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 
 namespace JIgor.Projects.SimplePicker.Api.Entities
@@ -16,8 +15,6 @@ namespace JIgor.Projects.SimplePicker.Api.Entities
 
                 _ = CreateMap<EventDto, Event>()
                     .ReverseMap();
-
-                _ = CreateMap<CreateEventRequestDto, Event>();
             }
         }
     }

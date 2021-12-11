@@ -9,29 +9,28 @@ using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using JIgor.Projects.SimplePicker.Api.Entities;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using MediatR;
+using OneOf;
 using JIgor.Projects.SimplePicker.Engine;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.PickValueCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 {
-    public class PickValueCommandHandler : IRequestHandler<PickValueCommand, IEnumerable<EventValueDto>>
+    public class PickValueCommandHandler : IRequestHandler<PickValueCommand, OneOf<Success, NotFound>>
     {
         private readonly IMapper _mapper;
-        private readonly IEventValueRepository _eventValueRepository;
         private readonly IEventRepository _eventRepository;
         private readonly ISimplePickerDatabaseContext _simplePickerDatabaseContext;
 
         public PickValueCommandHandler(IMapper mapper, 
-            IEventValueRepository eventValueRepository, 
             IEventRepository eventRepository, 
             ISimplePickerDatabaseContext simplePickerDatabaseContext)
         {
             _mapper = mapper;
-            _eventValueRepository = eventValueRepository;
             _eventRepository = eventRepository;
             _simplePickerDatabaseContext = simplePickerDatabaseContext;
         }
 
-        public async Task<IEnumerable<EventValueDto>> Handle(PickValueCommand request, CancellationToken cancellationToken)
+        public async Task<OneOf<Success, NotFound>> Handle(PickValueCommand request, CancellationToken cancellationToken)
         {
             _ = request ?? throw new ArgumentNullException(nameof(request));
 
@@ -41,7 +40,7 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 
             if (@event is null)
             {
-                throw new Exception("Either the event is already finished or it never existed!");
+                return new NotFound("Either the event is already finished or it never existed!");
             }
 
             var removedValues = ListPicker
@@ -58,7 +57,7 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
                 .SaveChangesAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            return _mapper.Map<IEnumerable<EventValueDto>>(removedValues);
+            return new Success(_mapper.Map<IEnumerable<EventValueDto>>(removedValues));
         }
 
         private static bool MarkAsPicked(IEnumerable<EventValue> eventValues, IEnumerable<Guid> pickedValuesIds)

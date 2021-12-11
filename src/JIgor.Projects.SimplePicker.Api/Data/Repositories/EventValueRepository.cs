@@ -26,14 +26,5 @@ namespace JIgor.Projects.SimplePicker.Api.Data.Repositories
                 .AddRangeAsync(eventValues, cancellationToken)
                 .ConfigureAwait(false);
         }
-
-        public async Task<IEnumerable<EventValue>> FindEventValues(Guid eventId, CancellationToken cancellationToken)
-        {
-            var eventValues = await _simplePickerDatabaseContext
-                .EventValues.Where(p => p.EventId == eventId)
-                .ToListAsync(cancellationToken).ConfigureAwait(false);
-
-            return eventValues;
-        }
     }
 }

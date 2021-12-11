@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using JIgor.Projects.SimplePicker.Api.Dtos.Default;
 using MediatR;
+using OneOf;
+using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.PickValueCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Command
 {
-    public class PickValueCommand : IRequest<IEnumerable<EventValueDto>>
+    public class PickValueCommand : IRequest<OneOf<Success, NotFound>>
     {
         public PickValueCommand(Guid eventId, int numberOfPicks)
         {

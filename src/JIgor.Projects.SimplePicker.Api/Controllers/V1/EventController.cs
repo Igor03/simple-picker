@@ -29,7 +29,9 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
                 .Send(new FindEventsQuery(), CancellationToken.None)
                 .ConfigureAwait(false);
 
-            return Ok(result);
+            return result.Match<IActionResult>(
+                success => Ok(success.Events),
+                notFound => NotFound(notFound.Message));
         }
 
         [HttpGet("{eventId:guid}")]
@@ -53,7 +55,9 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
                 .Send(new CreateEventCommand(@event), CancellationToken.None)
                 .ConfigureAwait(false);
 
-            return Ok(result);
+            return result.Match<IActionResult>(
+                success => Ok(success.EventId),
+                noValuesAttached => BadRequest(noValuesAttached));
         }
 
         [HttpPost("Attach/{eventId:guid}")]
@@ -77,7 +81,9 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
                 .Send(new PickValueCommand(eventId, numberOfPicks), CancellationToken.None)
                 .ConfigureAwait(false);
 
-            return Ok(result);
+            return result.Match<IActionResult>(
+                success => Ok(success.EventValues),
+                notFound => NotFound(notFound.Message));
         }
 
         [HttpDelete("Finish")]

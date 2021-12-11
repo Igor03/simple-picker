@@ -1,10 +1,10 @@
 ﻿namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses
 {
-    public partial class FinishEventCommandResponse
+    public partial class CreateEventCommandResponses
     {
-        public readonly struct NotFound
+        public readonly struct NoValuesAttached
         {
-            public NotFound(string message)
+            public NoValuesAttached(string message)
             {
                 Message = message;
             }

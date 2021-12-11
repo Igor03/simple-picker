@@ -2,14 +2,14 @@
 {
     public partial class AttachEventValueCommandResponse
     {
-        public struct NotFound
+        public readonly struct NotFound
         {
             public NotFound(string message)
             {
                 Message = message;
             }
 
-            public string Message { get; private set; }
+            public string Message { get; }
         }
     }
 }
