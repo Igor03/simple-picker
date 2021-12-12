@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EAFD7503-B7E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DB02A1E6-3560-4035-896B-438DE5F51E5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIgor.Projects.SimplePicker.UnitTests", "tests\JIgor.Projects.SimplePicker.UnitTests\JIgor.Projects.SimplePicker.UnitTests.csproj", "{5FE31733-4079-496D-AD81-3ACABFE5654F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JIgor.Projects.SimplePicker.UnitTests", "tests\JIgor.Projects.SimplePicker.UnitTests\JIgor.Projects.SimplePicker.UnitTests.csproj", "{5FE31733-4079-496D-AD81-3ACABFE5654F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIgor.Projects.SimplePicker.Engine", "src\JIgor.Projects.SimplePicker.Engine\JIgor.Projects.SimplePicker.Engine.csproj", "{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JIgor.Projects.SimplePicker.Engine", "src\JIgor.Projects.SimplePicker.Engine\JIgor.Projects.SimplePicker.Engine.csproj", "{433C12C9-AD9A-4E25-B3AB-CAEF6B02211B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
