@@ -5,16 +5,9 @@ using JIgor.Projects.SimplePicker.Engine.Exceptions;
 
 namespace JIgor.Projects.SimplePicker.Engine
 {
+    // TODO: Turn this into a Nuget Package
     public static class ListPicker
     {
-        /// <summary>
-        /// This extension allows the user to remove, randomly,
-        /// any number of elements from a object instance that inherits from IEnumerable
-        /// </summary>
-        /// <typeparam name="T"> Generic type T </typeparam>
-        /// <param name="list">Object instance that inherits from IEnumerable.</param>
-        /// <param name="numberOfPicks">Number of elements that suppose to be removed from the instance of IEnumerable.</param>
-        /// <returns> An updated instance of IEnumerable </returns>
         public static IEnumerable<T> PickElements<T>([NotNull] IEnumerable<T> list,
             int numberOfPicks)
             where T : notnull
@@ -56,15 +49,6 @@ namespace JIgor.Projects.SimplePicker.Engine
             return removedElements;
         }
 
-        /// <summary>
-        /// This extension allows the user to remove, randomly,
-        /// any number of elements from a object instance that inherits from IEnumerable.
-        /// </summary>
-        /// <typeparam name="T"> Generic type T </typeparam>
-        /// <param name="list">Object instance that inherits from IEnumerable.</param>
-        /// <param name="numberOfPicks">Number of elements that suppose to be removed from the instance of IEnumerable.</param>
-        /// <param name="pickCondition">Removal condition delegate that determines whether or not the random selected element will be removed</param>
-        /// <returns>An updated instance of IEnumerable.</returns>
         public static IEnumerable<T> PickElements<T>([NotNull] IEnumerable<T> list,
             int numberOfPicks,
             [NotNull] Func<T, bool> pickCondition)
