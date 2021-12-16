@@ -121,7 +121,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             eventController.ModelState.AddModelError("error", "error");
 
             // Act
-            var result = await eventController.FindEvent(Guid.NewGuid()).ConfigureAwait(false);
+            var result = await eventController.FindEvent(default).ConfigureAwait(false);
 
             // Assert
             _ = result.Should().NotBeNull().And
@@ -147,6 +147,42 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             _ = result.Should().NotBeNull().And
                 .BeOfType<OkObjectResult>().Which.Value
                 .Should().BeEquivalentTo(output);
+        }
+
+        [TestMethod]
+        public async Task CreateEventShouldReturnBadRequest()
+        {
+            // Arrange
+            var input = CreateEventShouldReturnBadRequestInput();
+            var outputMessage = "You need to have, at least, one value attached in order to create an event.";
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Is<CreateEventCommand>(p => p != null && p.Event == input), CancellationToken.None)
+                .Returns(new CreateEventCommandResponses.NoValuesAttached(outputMessage));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.CreateEvent(input).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<BadRequestObjectResult>().Which.Value
+                .Should().BeEquivalentTo(outputMessage);
+        }
+
+        [TestMethod]
+        public async Task CreateEventShouldReturnBadRequest_1()
+        {
+            // Arrange
+            var eventController = CreateEventController();
+            eventController.ModelState.AddModelError("error", "error");
+
+            // Act
+            var result = await eventController.CreateEvent(default!).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<BadRequestResult>();
         }
 
         private static EventController CreateEventController(IMediator mediator = null)

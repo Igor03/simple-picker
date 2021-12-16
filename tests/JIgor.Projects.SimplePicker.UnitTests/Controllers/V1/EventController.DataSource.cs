@@ -74,6 +74,20 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
 
                 return input;
             }
+
+            public static EventDto CreateEventShouldReturnBadRequestInput()
+            {
+                var input = new EventDto(
+                    "Some title",
+                    "Some description",
+                    DateTime.Now,
+                    DateTime.Now.AddDays(1),
+                    new List<EventValueDto>()
+                    {
+                    });
+
+                return input;
+            }
         }
     }
 }

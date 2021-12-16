@@ -70,7 +70,7 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
 
             return result.Match<IActionResult>(
                 success => Ok(success.EventId),
-                noValuesAttached => BadRequest(noValuesAttached));
+                noValuesAttached => BadRequest(noValuesAttached.Message));
         }
 
         [HttpPost("Attach/{eventId:guid}")]
