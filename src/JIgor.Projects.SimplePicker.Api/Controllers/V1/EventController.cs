@@ -25,11 +25,6 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpGet]
         public async Task<IActionResult> FindEvents()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var result = await _mediator
                 .Send(new FindEventsQuery(), CancellationToken.None)
                 .ConfigureAwait(false);
@@ -110,11 +105,6 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpDelete("Finish")]
         public async Task<IActionResult> FinishEvent([FromQuery] Guid eventId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var result = await _mediator
                 .Send(new FinishEventCommand(eventId), CancellationToken.None)
                 .ConfigureAwait(false);

@@ -59,21 +59,6 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
         }
 
         [TestMethod]
-        public async Task FindEventsShouldReturnBadRequest()
-        {
-            // Arrange
-            var eventController = CreateEventController();
-            eventController.ModelState.AddModelError("error", "error");
-
-            // Act
-            var result = await eventController.FindEvents().ConfigureAwait(false);
-
-            // Assert
-            _ = result.Should().NotBeNull().And
-                .BeOfType<BadRequestResult>();
-        }
-
-        [TestMethod]
         public async Task FindEventShouldReturnExpectedResult()
         {
             // Arrange
