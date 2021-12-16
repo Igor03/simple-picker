@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -32,9 +33,9 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
                 .FindEventsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            if (eventEntities is null)
+            if (eventEntities is null || !eventEntities.Any())
             {
-                return new NotFound("There aren't any active event at the moment!");
+                return new NotFound("There aren't any active events at the moment!");
             }
 
             var events = _mapper.Map<IEnumerable<EventDto>>(eventEntities);
