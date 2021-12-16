@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using JIgor.Projects.SimplePicker.Api.Controllers.V1;
+using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses;
 using MediatR;
@@ -25,7 +27,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             mediator.Send(Arg.Is<FindEventsQuery>(p => p != null), CancellationToken.None)
                 .Returns(new FindEventsQueryResponses.Success(output));
 
-            var eventController = CreateEvenController(mediator);
+            var eventController = CreateEventController(mediator);
 
             // Act
             var result = await eventController.FindEvents().ConfigureAwait(false);
@@ -45,7 +47,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             mediator.Send(Arg.Is<FindEventsQuery>(p => p != null), CancellationToken.None)
                 .Returns(new FindEventsQueryResponses.NotFound(outputMessage));
 
-            var eventController = CreateEvenController(mediator);
+            var eventController = CreateEventController(mediator);
 
             // Act
             var result = await eventController.FindEvents().ConfigureAwait(false);
@@ -57,6 +59,21 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
         }
 
         [TestMethod]
+        public async Task FindEventsShouldReturnBadRequest()
+        {
+            // Arrange
+            var eventController = CreateEventController();
+            eventController.ModelState.AddModelError("error", "error");
+
+            // Act
+            var result = await eventController.FindEvents().ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<BadRequestResult>();
+        }
+
+        [TestMethod]
         public async Task FindEventShouldReturnExpectedResult()
         {
             // Arrange
@@ -65,7 +82,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             mediator.Send(Arg.Is<FindEventQuery>(p => p != null && p.EventId != default), CancellationToken.None)
                 .Returns(new FindEventQueryResponses.Success(output));
 
-            var eventController = CreateEvenController(mediator);
+            var eventController = CreateEventController(mediator);
 
             // Act
             var result = await eventController.FindEvent(Guid.NewGuid()).ConfigureAwait(false);
@@ -85,7 +102,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             mediator.Send(Arg.Is<FindEventQuery>(p => p != null && p.EventId != default), CancellationToken.None)
                 .Returns(new FindEventQueryResponses.NotFound(outputMessage));
 
-            var eventController = CreateEvenController(mediator);
+            var eventController = CreateEventController(mediator);
 
             // Act
             var result = await eventController.FindEvent(Guid.NewGuid()).ConfigureAwait(false);
@@ -96,7 +113,43 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
                 .Should().BeEquivalentTo(outputMessage);
         }
 
-        private static EventController CreateEvenController(IMediator mediator = null)
+        [TestMethod]
+        public async Task FindEventShouldReturnBadRequest()
+        {
+            // Arrange
+            var eventController = CreateEventController();
+            eventController.ModelState.AddModelError("error", "error");
+
+            // Act
+            var result = await eventController.FindEvent(Guid.NewGuid()).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<BadRequestResult>();
+        }
+
+        [TestMethod]
+        public async Task CreateEventShouldReturnExpectedResult()
+        {
+            // Arrange
+            var input = CreateEventShouldReturnExpectedResultInput();
+            var output = Guid.NewGuid();
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Is<CreateEventCommand>(p => p != null && p.Event == input), CancellationToken.None)
+                .Returns(new CreateEventCommandResponses.Success(output));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.CreateEvent(input).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<OkObjectResult>().Which.Value
+                .Should().BeEquivalentTo(output);
+        }
+
+        private static EventController CreateEventController(IMediator mediator = null)
         {
             // mediator =  mediator ?? Substitute.For<IMediator>();
             mediator ??= Substitute.For<IMediator>();

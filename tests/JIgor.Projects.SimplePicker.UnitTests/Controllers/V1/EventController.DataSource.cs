@@ -58,6 +58,22 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
 
                 return output;
             }
+
+            public static EventDto CreateEventShouldReturnExpectedResultInput()
+            {
+                var input = new EventDto(
+                    "Some title",
+                    "Some description",
+                    DateTime.Now,
+                    DateTime.Now.AddDays(1),
+                    new List<EventValueDto>()
+                    {
+                        new EventValueDto("Breeze"),
+                        new EventValueDto("Brady"),
+                    });
+
+                return input;
+            }
         }
     }
 }
