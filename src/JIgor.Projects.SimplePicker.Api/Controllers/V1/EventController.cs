@@ -25,6 +25,11 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpGet]
         public async Task<IActionResult> FindEvents()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var result = await _mediator
                 .Send(new FindEventsQuery(), CancellationToken.None)
                 .ConfigureAwait(false);
@@ -37,6 +42,11 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpGet("{eventId:guid}")]
         public async Task<IActionResult> FindEvent(Guid eventId)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var result = await _mediator
                 .Send(new FindEventQuery(eventId), CancellationToken.None)
                 .ConfigureAwait(false);
@@ -49,7 +59,10 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpPost("Create")]
         public async Task<IActionResult> CreateEvent([FromBody] EventDto @event)
         {
-            _ = @event ?? throw new ArgumentNullException(nameof(@event));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
             var result = await _mediator
                 .Send(new CreateEventCommand(@event), CancellationToken.None)
@@ -63,7 +76,10 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpPost("Attach/{eventId:guid}")]
         public async Task<IActionResult> CreateEventValue(Guid eventId, [FromBody] IEnumerable<EventValueDto> eventValues)
         {
-            _ = eventValues ?? throw new ArgumentNullException(nameof(eventValues));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
             var result = await _mediator
                 .Send(new AttachEventValueCommand(eventId, eventValues), CancellationToken.None)
@@ -77,6 +93,11 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpPost("Pick/{eventId:guid}")]
         public async Task<IActionResult> CreateEventValue(Guid eventId, [FromQuery] int numberOfPicks = 1)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var result = await _mediator
                 .Send(new PickValueCommand(eventId, numberOfPicks), CancellationToken.None)
                 .ConfigureAwait(false);
@@ -89,6 +110,11 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         [HttpDelete("Finish")]
         public async Task<IActionResult> FinishEvent([FromQuery] Guid eventId)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var result = await _mediator
                 .Send(new FinishEventCommand(eventId), CancellationToken.None)
                 .ConfigureAwait(false);
