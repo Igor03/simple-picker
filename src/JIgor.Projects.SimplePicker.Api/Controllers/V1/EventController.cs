@@ -69,7 +69,7 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         }
 
         [HttpPost("Attach/{eventId:guid}")]
-        public async Task<IActionResult> CreateEventValue(Guid eventId, [FromBody] IEnumerable<EventValueDto> eventValues)
+        public async Task<IActionResult> AttachEventValue(Guid eventId, [FromBody] IEnumerable<EventValueDto> eventValues)
         {
             if (!ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
         }
 
         [HttpPost("Pick/{eventId:guid}")]
-        public async Task<IActionResult> CreateEventValue(Guid eventId, [FromQuery] int numberOfPicks = 1)
+        public async Task<IActionResult> PickEventValue(Guid eventId, [FromQuery] int numberOfPicks = 1)
         {
             if (!ModelState.IsValid)
             {

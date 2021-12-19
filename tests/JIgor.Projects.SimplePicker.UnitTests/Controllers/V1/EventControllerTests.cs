@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using JIgor.Projects.SimplePicker.Api.Controllers.V1;
+using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses;
@@ -164,6 +166,70 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
 
             // Act
             var result = await eventController.CreateEvent(default!).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<BadRequestResult>();
+        }
+
+        [TestMethod]
+        public async Task AttachEventValueShouldReturnExpectedResult()
+        {
+            // Arrange
+            var eventId = Guid.NewGuid();
+            var inputValues = GetAttachEventValueShouldReturnExpectedResultInput();
+
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Is<AttachEventValueCommand>(p => p != null 
+                                                               && p.EventId == eventId 
+                                                               && Equals(p.EventValues, inputValues)),
+                    CancellationToken.None)
+                .Returns(new AttachEventValueCommandResponses.Success(eventId));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.AttachEventValue(eventId, inputValues)
+                .ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<OkObjectResult>().Which.Value
+                .Should().BeEquivalentTo(eventId);
+        }
+
+        [TestMethod]
+        public async Task AttachEventValueShouldReturnNotFound()
+        {
+            // Arrange
+            var eventId = default(Guid);
+            var outputMessage = $"Either the event {eventId} is already finished or it never existed!";
+
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Any<AttachEventValueCommand>())
+                .Returns(new AttachEventValueCommandResponses.NotFound(outputMessage));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.AttachEventValue(eventId, default!)
+                .ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<NotFoundObjectResult>().Which.Value
+                .Should().BeEquivalentTo(outputMessage);
+        }
+
+        [TestMethod]
+        public async Task AttachEventValueShouldReturnBadRequest()
+        {
+            // Arrange
+            var eventController = CreateEventController();
+            eventController.ModelState.AddModelError("error", "error");
+
+            // Act
+            var result = await eventController.AttachEventValue(default, default!).ConfigureAwait(false);
 
             // Assert
             _ = result.Should().NotBeNull().And

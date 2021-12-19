@@ -88,6 +88,17 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
 
                 return input;
             }
+
+            public static IEnumerable<EventValueDto> GetAttachEventValueShouldReturnExpectedResultInput()
+            {
+                var output = new List<EventValueDto>()
+                {
+                    new EventValueDto("Breeze"),
+                    new EventValueDto("Brady")
+                };
+
+                return output;
+            }
         }
     }
 }
