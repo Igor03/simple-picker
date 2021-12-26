@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -234,6 +233,112 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             // Assert
             _ = result.Should().NotBeNull().And
                 .BeOfType<BadRequestResult>();
+        }
+
+        [TestMethod]
+        public async Task PickValueShouldReturnExpectedResult()
+        {
+            // Arrange
+            var eventId = Guid.NewGuid();
+
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Is<PickValueCommand>(p => p.EventId == eventId && p.NumberOfPicks > 0),
+                    CancellationToken.None)
+                .Returns(new PickValueCommandResponses.Success(new List<EventValueDto>()));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.PickEventValue(eventId, 3).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<OkObjectResult>().Which
+                .Value.Should().BeOfType<List<EventValueDto>>();
+        }
+
+        [TestMethod]
+        public async Task PickValueShouldReturnNotFoundOutput()
+        {
+            // Arrange
+            var eventId = Guid.NewGuid();
+            var outputMessage = "Either the event is already finished or it never existed!";
+
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Is<PickValueCommand>(p => p.EventId == eventId && p.NumberOfPicks > 0),
+                    CancellationToken.None)
+                .Returns(new PickValueCommandResponses.NotFound(outputMessage));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.PickEventValue(eventId, 3).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<NotFoundObjectResult>().Which
+                .Value.Should().Be(outputMessage);
+        }
+
+        [TestMethod]
+        public async Task PickValueShouldReturnBadRequest()
+        {
+            // Arrange
+            var eventController = CreateEventController();
+            eventController.ModelState.AddModelError("error", "error");
+
+            // Act
+            var result = await eventController.PickEventValue(default, default!).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<BadRequestResult>();
+        }
+
+        [TestMethod]
+        public async Task FinishEventShouldReturnExpectedResult()
+        {
+            // Arrange
+            var eventId = Guid.NewGuid();
+
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Is<FinishEventCommand>(p => p.EventId == eventId),
+                    CancellationToken.None)
+                .Returns(new FinishEventCommandResponses.Success(eventId));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.FinishEvent(eventId).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<OkObjectResult>().Which
+                .Value.Should().Be(eventId);
+        }
+
+        [TestMethod]
+        public async Task FinishEventShouldReturnNotFoundOutput()
+        {
+            // Arrange
+            var eventId = Guid.NewGuid();
+            var outputMessage = $"Unable to finish the event {eventId} this event!" +
+                                $" Maybe the event is already finished ot it never existed.";
+
+            var mediator = Substitute.For<IMediator>();
+            mediator.Send(Arg.Is<FinishEventCommand>(p => p.EventId == eventId),
+                    CancellationToken.None)
+                .Returns(new FinishEventCommandResponses.NotFound(outputMessage));
+
+            var eventController = CreateEventController(mediator);
+
+            // Act
+            var result = await eventController.FinishEvent(eventId).ConfigureAwait(false);
+
+            // Assert
+            _ = result.Should().NotBeNull().And
+                .BeOfType<NotFoundObjectResult>().Which
+                .Value.Should().Be(outputMessage);
         }
 
         private static EventController CreateEventController(IMediator mediator = null)
