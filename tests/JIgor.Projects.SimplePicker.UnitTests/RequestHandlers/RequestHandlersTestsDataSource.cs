@@ -70,5 +70,40 @@ namespace JIgor.Projects.SimplePicker.UnitTests.RequestHandlers
 
             return new object[] {eventEntitySeed, mappedEntitySeed};
         }
+
+        public static object[] GetFindEventQueryHandlerShouldReturnExpectedResultData()
+        {
+            var eventId = Guid.NewGuid();
+
+            var eventEntity = new Event(
+                eventId,
+                "Some title",
+                "Some description",
+                DateTime.Now,
+                DateTime.Now.AddDays(1),
+                false,
+                new List<EventValue>()
+                {
+                    new EventValue(Guid.NewGuid(), eventId, "Breeze", false),
+                    new EventValue(Guid.NewGuid(), eventId, "Brady", false),
+                });
+
+            var mappedEventEntity = new EventDto()
+            {
+                Title = "Some title",
+                Description = "Some description",
+                StartDate = DateTime.Now,
+                DueDate = DateTime.Now.AddDays(1),
+                EventValues = new List<EventValueDto>()
+                {
+                    new EventValueDto("Breeze"),
+                    new EventValueDto("Brady")
+                }
+            };
+
+           
+
+            return new object[] { eventId, eventEntity, mappedEventEntity };
+        }
     }
 }
