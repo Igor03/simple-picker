@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using JIgor.Projects.SimplePicker.Api.Data.Contracts;
@@ -36,6 +37,11 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
             }
 
             @event.IsFinished = true;
+            @event.EventValues.Where(e => !e.IsPicked)
+                .ToList().ForEach(e =>
+                {
+                    e.IsPicked = true;
+                });
 
             _ = await _simplePickerDatabaseContext
                 .SaveChangesAsync(cancellationToken)

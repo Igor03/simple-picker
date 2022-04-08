@@ -43,7 +43,6 @@ namespace JIgor.Projects.SimplePicker.Engine
                 removedElements.Add(element);
 
                 castedList.Remove(element);
-
             }
 
             return removedElements;
