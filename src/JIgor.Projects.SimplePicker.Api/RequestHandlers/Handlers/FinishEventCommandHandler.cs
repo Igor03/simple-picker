@@ -38,9 +38,9 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
 
             @event.IsFinished = true;
             @event.EventValues.Where(e => !e.IsPicked)
-                .ToList().ForEach(e =>
+                .ToList().ForEach(ev =>
                 {
-                    e.IsPicked = true;
+                    ev.IsPicked = true;
                 });
 
             _ = await _simplePickerDatabaseContext

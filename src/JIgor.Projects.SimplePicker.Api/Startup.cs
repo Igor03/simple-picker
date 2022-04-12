@@ -42,8 +42,6 @@ namespace JIgor.Projects.SimplePicker.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
-            
-
             _ = app.ConfigureCustomExceptionHandler()
                 .UseCustomSwagger(provider)
                 .UseHttpsRedirection()

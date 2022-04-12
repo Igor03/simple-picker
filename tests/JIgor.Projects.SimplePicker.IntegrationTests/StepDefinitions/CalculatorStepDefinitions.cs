@@ -1,3 +1,4 @@
+using JIgor.Projects.SimplePicker.IntegrationTests.Support;
 using TechTalk.SpecFlow;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
@@ -5,6 +6,14 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
     [Binding]
     public sealed class CalculatorStepDefinitions
     {
+        private DatabaseClient _databaseClient;
+
+        public CalculatorStepDefinitions(DatabaseClient databaseClient)
+        {
+            _databaseClient = databaseClient;
+        }
+
+
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         [Given("the first number is (.*)")]
