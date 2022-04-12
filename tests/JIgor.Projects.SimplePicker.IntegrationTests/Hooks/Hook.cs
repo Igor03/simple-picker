@@ -1,6 +1,6 @@
-﻿using JIgor.Projects.SimplePicker.Api.Database.DataContexts;
+﻿using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
 using System;
-using System.Linq;
+using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.Hooks
@@ -10,17 +10,20 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Hooks
     {
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
 
-        private SimplePickerDatabaseContext _dbContext;
+        private DatabaseHelper _databaseClient;
+        private HttpClientHelper _httpClient;
 
-        public Hook(SimplePickerDatabaseContext dbContext)
+        public Hook(DatabaseHelper databaseClient, HttpClientHelper httpClient)
         {
-            _dbContext = dbContext;
+            _databaseClient = databaseClient;
+            _httpClient = httpClient;
         }
 
         [BeforeScenario("@mytag", Order = 1)]
-        public void BeforeScenarioWithTag()
+        public async Task BeforeScenarioWithTag()
         {
-            var x = this._dbContext.Events.ToList();
+            await _databaseClient.GetResource(new { igor = 2 })
+                .ConfigureAwait(default);
 
             // Example of filtering hooks using tags. (in this case, this 'before scenario' hook will execute if the feature/scenario contains the tag '@tag1')
             // See https://docs.specflow.org/projects/specflow/en/latest/Bindings/Hooks.html?highlight=hooks#tag-scoping

@@ -1,4 +1,5 @@
 using JIgor.Projects.SimplePicker.IntegrationTests.Support;
+using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
 using TechTalk.SpecFlow;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
@@ -6,11 +7,11 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
     [Binding]
     public sealed class CalculatorStepDefinitions
     {
-        private DatabaseClient _databaseClient;
+        private DatabaseHelper _database;
 
-        public CalculatorStepDefinitions(DatabaseClient databaseClient)
+        public CalculatorStepDefinitions(DatabaseHelper database)
         {
-            _databaseClient = databaseClient;
+            _database = database;
         }
 
 

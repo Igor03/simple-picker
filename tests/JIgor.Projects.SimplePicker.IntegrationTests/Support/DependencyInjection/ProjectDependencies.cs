@@ -10,6 +10,9 @@ using System.Reflection;
 using System.Linq;
 using TechTalk.SpecFlow;
 using System.IO;
+using JIgor.Projects.SimplePicker.Api.Data.Contracts;
+using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
+using System.Net.Http;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjection
 {
@@ -25,6 +28,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
             // Here, the order matter
             RegisterConfigurationRoot(builder);
             RegisterDatabase(builder, _configuration!);
+            RegisterHelpers(builder, _configuration!);
 
             // Registering all the binding types - SpecFlow
             _ = builder.RegisterTypes(
@@ -32,6 +36,22 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
                 .Where(t => Attribute.IsDefined(t, typeof(BindingAttribute))).ToArray());
 
             return builder;
+        }
+
+        private static void RegisterHelpers(ContainerBuilder builder, IConfiguration configuration)
+        {
+            _ = builder.RegisterType<DatabaseHelper>();
+
+            _ = builder.Register(c =>
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("https://localhost:8080/");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+                _ = builder.RegisterInstance(client).As<HttpClient>();
+
+                return new HttpClientHelper(client);
+            }).As<HttpClientHelper>().SingleInstance();
         }
 
         private static void RegisterConfigurationRoot(ContainerBuilder builder)
@@ -44,6 +64,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
                 .AddJsonFile(secretsJson, false)
+                .AddJsonFile("appsettings.Json", false)
                 .Build();
 
             builder.RegisterInstance(_configuration)
@@ -60,7 +81,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
                 .As<DbContextOptions<SimplePickerDatabaseContext>>();
 
             // Dont need to specify constructor because we already registered all the types needed
-            builder.RegisterType<SimplePickerDatabaseContext>();
+            builder.RegisterType<SimplePickerDatabaseContext>().As<ISimplePickerDatabaseContext>();
                 //.UsingConstructor(typeof(DbContextOptions<SimplePickerDatabaseContext>), typeof(IConfiguration));
         }
     }
