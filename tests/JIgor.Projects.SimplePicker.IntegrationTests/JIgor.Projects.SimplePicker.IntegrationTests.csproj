@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Drivers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\JIgor.Projects.SimplePicker.Api\JIgor.Projects.SimplePicker.Api.csproj" />
   </ItemGroup>
 
