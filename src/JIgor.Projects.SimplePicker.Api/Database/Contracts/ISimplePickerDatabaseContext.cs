@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using JIgor.Projects.SimplePicker.Api.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace JIgor.Projects.SimplePicker.Api.Data.Contracts
+namespace JIgor.Projects.SimplePicker.Api.Database.Contracts
 {
     public interface ISimplePickerDatabaseContext
     {
@@ -12,5 +13,7 @@ namespace JIgor.Projects.SimplePicker.Api.Data.Contracts
         DbSet<Event> Events { get; set; }
 
         DbSet<EventValue> EventValues { get; set; }
+        
+        DatabaseFacade Database { get; }
     }
 }

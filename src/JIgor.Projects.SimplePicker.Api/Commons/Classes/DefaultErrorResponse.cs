@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace JIgor.Projects.SimplePicker.Api.Commons
+namespace JIgor.Projects.SimplePicker.Api.Commons.Classes
 {
     internal class DefaultErrorResponse
     {

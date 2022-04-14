@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Data.Contracts;
+using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 using JIgor.Projects.SimplePicker.Api.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 
 namespace JIgor.Projects.SimplePicker.Api.Database.DataContexts
@@ -19,11 +21,14 @@ namespace JIgor.Projects.SimplePicker.Api.Database.DataContexts
             _configuration = configuration;
             Events = Set<Event>();
             EventValues = Set<EventValue>();
+            Database = base.Database;
         }
 
         public DbSet<Event> Events { get; set; }
 
         public DbSet<EventValue> EventValues { get; set; }
+
+        public new DatabaseFacade Database { get; } 
 
         public new async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

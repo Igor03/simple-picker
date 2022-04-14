@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using JIgor.Projects.SimplePicker.Api.Data.Contracts;
 using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;

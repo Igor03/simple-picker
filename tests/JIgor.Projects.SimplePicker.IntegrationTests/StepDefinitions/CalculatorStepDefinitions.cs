@@ -1,4 +1,3 @@
-using JIgor.Projects.SimplePicker.IntegrationTests.Support;
 using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
 using TechTalk.SpecFlow;
 

@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Commons;
+using JIgor.Projects.SimplePicker.Api.Commons.Classes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 

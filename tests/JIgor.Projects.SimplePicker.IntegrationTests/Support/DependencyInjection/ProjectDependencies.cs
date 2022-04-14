@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using SpecFlow.Autofac;
 using Microsoft.EntityFrameworkCore;
 using JIgor.Projects.SimplePicker.Api.Database.DataContexts;
@@ -10,15 +8,15 @@ using System.Reflection;
 using System.Linq;
 using TechTalk.SpecFlow;
 using System.IO;
-using JIgor.Projects.SimplePicker.Api.Data.Contracts;
 using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
 using System.Net.Http;
+using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjection
 {
     internal class ProjectDependencies
     {
-        public static IConfiguration? _configuration;
+        private static IConfiguration? _configuration;
 
         [ScenarioDependencies]
         public static ContainerBuilder CreateContainerBuilder()

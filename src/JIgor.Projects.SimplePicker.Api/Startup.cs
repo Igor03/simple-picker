@@ -1,8 +1,10 @@
+using System.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using JIgor.Projects.SimplePicker.Api.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
@@ -14,9 +16,9 @@ namespace JIgor.Projects.SimplePicker.Api
         {
             Configuration = configuration;
         }
-
+        
         public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -36,7 +38,8 @@ namespace JIgor.Projects.SimplePicker.Api
                 })
                 .AddMappingProfiles()
                 .AddRequestHandlers()
-                .AddRequestValidators();
+                .AddRequestValidators()
+                .AddCustomHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +53,8 @@ namespace JIgor.Projects.SimplePicker.Api
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
-                });
+                })
+                .UseCustomHealthChecks();
         }
     }
 }
