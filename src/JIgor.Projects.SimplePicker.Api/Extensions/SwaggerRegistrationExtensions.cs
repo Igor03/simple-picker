@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using JIgor.Projects.SimplePicker.Api.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace JIgor.Projects.SimplePicker.Api.Extensions
@@ -21,6 +19,7 @@ namespace JIgor.Projects.SimplePicker.Api.Extensions
                 .AddSwaggerGen(options =>
                 {
                     options.OperationFilter<SwaggerDefaultValues>();
+                    options.DocumentFilter<HealthChecksFilter>();
                 });
         }
 
