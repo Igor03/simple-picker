@@ -20,31 +20,48 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers
             _configuration = configuration;
         }
 
-        public async Task<object> CreateEventAsync(object body)
+        public async Task<Guid> CreateEventAsync(EventDto body)
         {
+            var uri = "api/v1/Event/Create";
+
             var message = new HttpRequestMessage()
             {
                 Method = HttpMethod.Get,
                 Content = new StringContent(JsonConvert.SerializeObject(body)),
             };
 
-            var @event = new EventDto()
-            {
-                Description = "Description",
-                DueDate = DateTime.Now.AddDays(1),
-                StartDate = DateTime.Now,
-                Title = "Title",
-                EventValues = new List<EventValueDto>()
-                {
-                    new EventValueDto("Value"),
-                    new EventValueDto("Value")
-                }
-            };
+            var content = new StringContent(
+                JsonConvert.SerializeObject(body),
+                Encoding.UTF8, "application/json");
 
-            var content = new StringContent(JsonConvert.SerializeObject(@event), Encoding.UTF8, "application/json");
-            var created = await _httpClient.PostAsync("api/v1/Event/Create", content);
-            var response = await _httpClient.GetAsync("api/v1/Event");
-            return response;
+            var created = await _httpClient.PostAsync(uri, content);
+            
+            if (!created.IsSuccessStatusCode) return default;
+            return JsonConvert.DeserializeObject<Guid>(
+                await created.Content.ReadAsStringAsync());
+        }
+
+        public async Task<EventDto?> GetEvent(Guid eventId)
+        {
+            var uri = $"api/v1/Event/{eventId}";
+
+            var response = await _httpClient.GetAsync(uri);
+
+            if (!response.IsSuccessStatusCode) return null;
+            return JsonConvert.DeserializeObject<EventDto?>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<Guid> DeleteEvent(Guid eventId)
+        {
+            var uri = $"api/v1/Event/Finish?eventId={eventId}";
+            
+            var response = await _httpClient.DeleteAsync(uri);
+
+            if (!response.IsSuccessStatusCode) return Guid.Empty;
+            return JsonConvert.DeserializeObject<Guid>(
+                await response.Content.ReadAsStringAsync());
+
         }
     }
 }

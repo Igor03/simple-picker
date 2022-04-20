@@ -1,5 +1,7 @@
-﻿using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
+﻿using JIgor.Projects.SimplePicker.Api.Dtos;
+using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -22,16 +24,21 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Hooks
         [BeforeScenario("@mytag", Order = 1)]
         public async Task BeforeScenarioWithTag()
         {
-            await _databaseClient.GetResource(new { igor = 2 })
-                .ConfigureAwait(default);
+            var @event = new EventDto()
+            {
+                Description = "Description",
+                DueDate = DateTime.Now.AddDays(1),
+                StartDate = DateTime.Now,
+                Title = "Title",
+                EventValues = new List<EventValueDto>()
+                {
+                    new EventValueDto("Value"),
+                    new EventValueDto("Value")
+                }
+            };
 
-            await _httpClient.CreateEventAsync(new {Igo=12 });
-
-            // Example of filtering hooks using tags. (in this case, this 'before scenario' hook will execute if the feature/scenario contains the tag '@tag1')
-            // See https://docs.specflow.org/projects/specflow/en/latest/Bindings/Hooks.html?highlight=hooks#tag-scoping
-
-            //TODO: implement logic that has to run before executing each scenario
-            Console.WriteLine("ofijeiojf");
+            var returnedId = await _httpClient.CreateEventAsync(@event);
+            await _httpClient.DeleteEvent(returnedId);
         }
 
         [BeforeScenario("mytag", Order = 2)]
