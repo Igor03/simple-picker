@@ -25,6 +25,8 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Hooks
             await _databaseClient.GetResource(new { igor = 2 })
                 .ConfigureAwait(default);
 
+            await _httpClient.CreateEventAsync(new {Igo=12 });
+
             // Example of filtering hooks using tags. (in this case, this 'before scenario' hook will execute if the feature/scenario contains the tag '@tag1')
             // See https://docs.specflow.org/projects/specflow/en/latest/Bindings/Hooks.html?highlight=hooks#tag-scoping
 

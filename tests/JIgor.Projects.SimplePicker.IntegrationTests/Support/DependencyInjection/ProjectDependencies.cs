@@ -38,17 +38,20 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
 
         private static void RegisterHelpers(ContainerBuilder builder, IConfiguration configuration)
         {
+            _ = builder ?? throw new ArgumentNullException(nameof(builder));
+            _ = configuration ?? throw new ArgumentNullException(nameof(configuration));
+
             _ = builder.RegisterType<DatabaseHelper>();
 
             _ = builder.Register(c =>
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:8080/");
+                client.BaseAddress = new Uri("https://localhost:5001/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
 
                 _ = builder.RegisterInstance(client).As<HttpClient>();
 
-                return new HttpClientHelper(client);
+                return new HttpClientHelper(client, configuration);
             }).As<HttpClientHelper>().SingleInstance();
         }
 
@@ -80,7 +83,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
 
             // Dont need to specify constructor because we already registered all the types needed
             builder.RegisterType<SimplePickerDatabaseContext>().As<ISimplePickerDatabaseContext>();
-                //.UsingConstructor(typeof(DbContextOptions<SimplePickerDatabaseContext>), typeof(IConfiguration));
+            // .UsingConstructor(typeof(DbContextOptions<SimplePickerDatabaseContext>), typeof(IConfiguration));
         }
     }
 }

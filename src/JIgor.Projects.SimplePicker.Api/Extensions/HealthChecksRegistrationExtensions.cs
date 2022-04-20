@@ -20,7 +20,7 @@ namespace JIgor.Projects.SimplePicker.Api.Extensions
 
         public static IApplicationBuilder UseCustomHealthChecks(this IApplicationBuilder builder)
         {
-            _ = builder.UseHealthChecks("/health", new HealthCheckOptions
+            _ = builder.UseHealthChecks("/CheckHealth", new HealthCheckOptions
             {
                 ResponseWriter = async (context, report) =>
                 {

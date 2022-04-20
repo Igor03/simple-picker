@@ -6,7 +6,7 @@ namespace JIgor.Projects.SimplePicker.Api.Swagger
 {
     public class HealthChecksFilter : IDocumentFilter
     {
-        public const string HealthCheckEndpoint = @"/health";
+        public const string HealthCheckEndpoint = @"/CheckHealth";
         
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {

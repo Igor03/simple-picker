@@ -7,11 +7,14 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
     public sealed class CalculatorStepDefinitions
     {
         private DatabaseHelper _database;
+        private HttpClientHelper _httpClient;
 
-        public CalculatorStepDefinitions(DatabaseHelper database)
+        public CalculatorStepDefinitions(DatabaseHelper database, HttpClientHelper httpClient)
         {
             _database = database;
+            _httpClient = httpClient;
         }
+
 
 
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
