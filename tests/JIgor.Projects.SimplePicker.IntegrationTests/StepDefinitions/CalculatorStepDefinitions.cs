@@ -15,8 +15,6 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
         {
         }
 
-
-
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         [Given("the first number is (.*)")]

@@ -31,4 +31,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Support\Configuration\" />
+    <Folder Include="Support\Mocks\" />
+  </ItemGroup>
+
 </Project>
