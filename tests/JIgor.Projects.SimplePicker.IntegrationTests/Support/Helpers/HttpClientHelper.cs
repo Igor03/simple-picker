@@ -52,6 +52,24 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers
                 await response.Content.ReadAsStringAsync());
         }
 
+        public async Task<HttpResponseMessage> GetEventAsync(Guid eventId)
+        {
+            var uri = $"api/v1/Event/{eventId}";
+
+            var response = await _httpClient.GetAsync(uri);
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> CheckApplicationHealth()
+        {
+            var uri = $"CheckHealth";
+            
+            var response = await _httpClient.GetAsync(uri);
+
+            return response;
+        }
+
         public async Task<Guid> DeleteEvent(Guid eventId)
         {
             var uri = $"api/v1/Event/Finish?eventId={eventId}";

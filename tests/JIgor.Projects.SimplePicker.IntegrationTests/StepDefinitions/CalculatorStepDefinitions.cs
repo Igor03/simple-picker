@@ -1,3 +1,4 @@
+using FluentAssertions;
 using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
 using TechTalk.SpecFlow;
 
@@ -6,13 +7,12 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
     [Binding]
     public sealed class CalculatorStepDefinitions
     {
-        private DatabaseHelper _database;
-        private HttpClientHelper _httpClient;
+        private int n1;
+        private int n2;
+        private int result;
 
-        public CalculatorStepDefinitions(DatabaseHelper database, HttpClientHelper httpClient)
+        public CalculatorStepDefinitions()
         {
-            _database = database;
-            _httpClient = httpClient;
         }
 
 
@@ -28,7 +28,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
             // additional string/Table parameters can be defined on the step definition
             // method. 
 
-            throw new PendingStepException();
+            n1 = number;
         }
 
         [Given("the second number is (.*)")]
@@ -36,15 +36,15 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
         {
             //TODO: implement arrange (precondition) logic
 
-            throw new PendingStepException();
+            n2 = number;
         }
 
         [When("the two numbers are added")]
         public void WhenTheTwoNumbersAreAdded()
         {
             //TODO: implement act (action) logic
+            result = n2 + n1;
 
-            throw new PendingStepException();
         }
 
         [Then("the result should be (.*)")]
@@ -52,7 +52,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
         {
             //TODO: implement assert (verification) logic
 
-            throw new PendingStepException();
+            this.result.Should().Be(result);
         }
     }
 }
