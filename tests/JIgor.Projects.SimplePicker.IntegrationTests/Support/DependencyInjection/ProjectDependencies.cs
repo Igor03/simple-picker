@@ -31,7 +31,8 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
             // Registering all the binding types - SpecFlow
             _ = builder.RegisterTypes(
                 Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => Attribute.IsDefined(t, typeof(BindingAttribute))).ToArray());
+                .Where(t => Attribute.IsDefined(t, typeof(BindingAttribute))).ToArray())
+                .SingleInstance();
 
             return builder;
         }
@@ -49,7 +50,8 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
                 client.BaseAddress = new Uri("https://localhost:5001/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
 
-                _ = builder.RegisterInstance(client).As<HttpClient>();
+                _ = builder.RegisterInstance(client).As<HttpClient>()
+                    .SingleInstance();
 
                 return new HttpClientHelper(client, configuration);
             }).As<HttpClientHelper>().SingleInstance();
@@ -69,7 +71,8 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
                 .Build();
 
             builder.RegisterInstance(_configuration)
-                .As<IConfiguration>();
+                .As<IConfiguration>()
+                .SingleInstance();
         }
 
         private static void RegisterDatabase(ContainerBuilder builder, IConfiguration configuration)
@@ -79,7 +82,8 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
             dbContextBuilder.UseSqlServer(_configuration.GetConnectionString("mssqlserver"));
 
             builder.RegisterInstance(dbContextBuilder.Options)
-                .As<DbContextOptions<SimplePickerDatabaseContext>>();
+                .As<DbContextOptions<SimplePickerDatabaseContext>>()
+                .SingleInstance();
 
             // Dont need to specify constructor because we already registered all the types needed
             builder.RegisterType<SimplePickerDatabaseContext>().As<ISimplePickerDatabaseContext>();
