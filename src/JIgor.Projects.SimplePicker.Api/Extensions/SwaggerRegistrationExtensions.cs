@@ -1,10 +1,10 @@
-﻿using System;
-using JIgor.Projects.SimplePicker.Api.Swagger;
+﻿using JIgor.Projects.SimplePicker.Api.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
 
 namespace JIgor.Projects.SimplePicker.Api.Extensions
 {

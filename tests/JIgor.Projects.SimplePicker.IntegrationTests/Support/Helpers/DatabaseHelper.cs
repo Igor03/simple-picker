@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JIgor.Projects.SimplePicker.Api.Database.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers
 {

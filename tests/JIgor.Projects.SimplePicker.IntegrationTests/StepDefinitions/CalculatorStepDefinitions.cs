@@ -1,5 +1,4 @@
 using FluentAssertions;
-using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
 using TechTalk.SpecFlow;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
@@ -24,7 +23,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
             // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata
             // To use the multiline text or the table argument of the scenario,
             // additional string/Table parameters can be defined on the step definition
-            // method. 
+            // method.
 
             n1 = number;
         }
@@ -42,7 +41,6 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
         {
             //TODO: implement act (action) logic
             result = n2 + n1;
-
         }
 
         [Then("the result should be (.*)")]

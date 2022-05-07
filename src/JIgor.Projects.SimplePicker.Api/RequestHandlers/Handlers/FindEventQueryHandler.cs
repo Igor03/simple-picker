@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using MediatR;
 using OneOf;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.FindEventQueryResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers

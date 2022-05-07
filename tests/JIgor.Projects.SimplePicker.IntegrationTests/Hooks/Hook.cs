@@ -54,7 +54,6 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Hooks
         [AfterScenario]
         public void AfterScenario()
         {
-
             //TODO: implement logic that has to run after executing each scenario
         }
     }

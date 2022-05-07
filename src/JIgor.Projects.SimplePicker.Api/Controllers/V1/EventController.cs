@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Dtos;
+﻿using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace JIgor.Projects.SimplePicker.Api.Controllers.V1
 {

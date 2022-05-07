@@ -1,7 +1,6 @@
-﻿using System;
+﻿using JIgor.Projects.SimplePicker.Api.Dtos;
+using System;
 using System.Collections.Generic;
-using JIgor.Projects.SimplePicker.Api.Dtos;
-using JIgor.Projects.SimplePicker.Api.Entities;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
 {
@@ -27,9 +26,9 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
                             new EventValueDto("Brady"),
                         }),
                     new EventDto(
-                        "Some title", 
-                        "Some description", 
-                        DateTime.Now, 
+                        "Some title",
+                        "Some description",
+                        DateTime.Now,
                         DateTime.Now.AddDays(1),
                         new List<EventValueDto>()
                         {

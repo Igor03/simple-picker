@@ -1,10 +1,10 @@
+using JIgor.Projects.SimplePicker.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using JIgor.Projects.SimplePicker.Api.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace JIgor.Projects.SimplePicker.Api
 {
@@ -14,9 +14,9 @@ namespace JIgor.Projects.SimplePicker.Api
         {
             Configuration = configuration;
         }
-        
+
         public IConfiguration Configuration { get; }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {

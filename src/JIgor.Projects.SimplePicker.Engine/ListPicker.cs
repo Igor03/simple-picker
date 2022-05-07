@@ -1,7 +1,7 @@
-﻿using System;
+﻿using JIgor.Projects.SimplePicker.Engine.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using JIgor.Projects.SimplePicker.Engine.Exceptions;
 
 namespace JIgor.Projects.SimplePicker.Engine
 {

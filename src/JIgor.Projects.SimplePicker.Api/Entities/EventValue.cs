@@ -19,7 +19,7 @@ namespace JIgor.Projects.SimplePicker.Api.Entities
         public Guid Id { get; set; }
 
         public Guid EventId { get; set; }
-        
+
         public string? Value { get; set; }
 
         public bool IsPicked { get; set; }

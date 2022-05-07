@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace JIgor.Projects.SimplePicker.Api.Extensions
 {

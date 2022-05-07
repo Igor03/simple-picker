@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Collections.Generic;
 
 namespace JIgor.Projects.SimplePicker.Api.Swagger
 {
     public class HealthChecksFilter : IDocumentFilter
     {
         public const string HealthCheckEndpoint = @"/CheckHealth";
-        
+
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
             var pathItem = new OpenApiPathItem();

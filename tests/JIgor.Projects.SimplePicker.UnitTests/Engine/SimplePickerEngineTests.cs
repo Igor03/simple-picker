@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using JIgor.Projects.SimplePicker.Engine;
 using JIgor.Projects.SimplePicker.Engine.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.Engine
 {
@@ -15,7 +15,6 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Engine
         [TestMethod]
         public void PickElements_1_ShouldReturnExpectedResult()
         {
-
             // Arrange
             var seed = new List<string>()
             {
@@ -58,7 +57,6 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Engine
         [TestMethod]
         public void PickElements_1_ShouldThrowInvalidNumberOfPicksException_1()
         {
-
             // Arrange
             var sourceList = new List<string>()
             {
@@ -69,8 +67,10 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Engine
             var numberOfPicks = 0;
 
             #region Act
+
             Action result = () => _ = ListPicker.PickElements(sourceList, numberOfPicks);
-            #endregion
+
+            #endregion Act
 
             // Assert
             result.Should().ThrowExactly<InvalidNumberOfPicksException>(because:
@@ -80,7 +80,6 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Engine
         [TestMethod]
         public void PickElements_1_ShouldThrowInvalidNumberOfPicksException_2()
         {
-
             // Arrange
             var sourceList = new List<string>()
             {
@@ -101,7 +100,6 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Engine
         [TestMethod]
         public void PickElements_2_ShouldReturnExpectedResult()
         {
-
             // Arrange
             var seed = new List<string>()
             {
@@ -132,7 +130,6 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Engine
         [TestMethod]
         public void PickElements_2_ShouldThrowEmptyListException()
         {
-
             // Arrange
             var seed = new List<string>() { };
             var numberOfPicks = 2;

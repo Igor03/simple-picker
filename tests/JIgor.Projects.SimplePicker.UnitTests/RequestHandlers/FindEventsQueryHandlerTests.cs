@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
 using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 using JIgor.Projects.SimplePicker.Api.Dtos;
@@ -12,7 +8,10 @@ using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using static JIgor.Projects.SimplePicker.UnitTests.RequestHandlers.RequestHandlersTestsDataSource;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.RequestHandlers

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using JIgor.Projects.SimplePicker.Api.Dtos;
+﻿using JIgor.Projects.SimplePicker.Api.Dtos;
 using MediatR;
 using OneOf;
+using System;
+using System.Collections.Generic;
 using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.AttachEventValueCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Command

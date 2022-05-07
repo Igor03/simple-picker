@@ -1,16 +1,16 @@
 ﻿using Autofac;
-using System;
-using SpecFlow.Autofac;
-using Microsoft.EntityFrameworkCore;
-using JIgor.Projects.SimplePicker.Api.Database.DataContexts;
-using Microsoft.Extensions.Configuration;
-using System.Reflection;
-using System.Linq;
-using TechTalk.SpecFlow;
-using System.IO;
-using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
-using System.Net.Http;
 using JIgor.Projects.SimplePicker.Api.Database.Contracts;
+using JIgor.Projects.SimplePicker.Api.Database.DataContexts;
+using JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using SpecFlow.Autofac;
+using System;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Reflection;
+using TechTalk.SpecFlow;
 
 namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjection
 {
@@ -22,7 +22,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
         public static ContainerBuilder CreateContainerBuilder()
         {
             var builder = new ContainerBuilder();
-            
+
             // Here, the order matter
             RegisterConfigurationRoot(builder);
             RegisterDatabase(builder, _configuration!);

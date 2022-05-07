@@ -28,7 +28,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
         {
             var httpResponse = await this._httpClient
                 .CheckApplicationHealth();
-            
+
             this._result = (int)httpResponse.StatusCode;
         }
 
@@ -37,6 +37,5 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.StepDefinitions
         {
             this._result.Should().Be(statusCode);
         }
-
     }
 }

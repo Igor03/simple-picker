@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace JIgor.Projects.SimplePicker.Api.Swagger
 {
@@ -38,7 +38,7 @@ namespace JIgor.Projects.SimplePicker.Api.Swagger
                 options.SwaggerDoc(apiVersionDescription.GroupName, openApiInfo);
             }
 
-            // var applicationName = 
+            // var applicationName =
             var projectPath = Path.Combine(AppContext.BaseDirectory, "JIgor.Projects.SimplePicker.Api.xml");
             options.IncludeXmlComments(projectPath);
         }

@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +34,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers
                 Encoding.UTF8, "application/json");
 
             var created = await _httpClient.PostAsync(uri, content);
-            
+
             if (!created.IsSuccessStatusCode) return default;
             return JsonConvert.DeserializeObject<Guid>(
                 await created.Content.ReadAsStringAsync());
@@ -64,7 +63,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers
         public async Task<HttpResponseMessage> CheckApplicationHealth()
         {
             var uri = $"CheckHealth";
-            
+
             var response = await _httpClient.GetAsync(uri);
 
             return response;
@@ -73,13 +72,12 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.Helpers
         public async Task<Guid> DeleteEvent(Guid eventId)
         {
             var uri = $"api/v1/Event/Finish?eventId={eventId}";
-            
+
             var response = await _httpClient.DeleteAsync(uri);
 
             if (!response.IsSuccessStatusCode) return Guid.Empty;
             return JsonConvert.DeserializeObject<Guid>(
                 await response.Content.ReadAsStringAsync());
-
         }
     }
 }
