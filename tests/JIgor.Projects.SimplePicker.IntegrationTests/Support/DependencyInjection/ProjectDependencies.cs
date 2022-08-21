@@ -62,7 +62,7 @@ namespace JIgor.Projects.SimplePicker.IntegrationTests.Support.DependencyInjecti
             const string machineUser = "jigor";
             const string secretsJsonId = "1a47e734-38fd-45dc-aac3-4c4690921215";
             var secretsJson =
-                $"C:/Users/{machineUser}/AppData/Roaming/Microsoft/UserSecrets/{secretsJsonId}/secrets.json";
+                @$"C:/Users/{machineUser}/AppData/Roaming/Microsoft/UserSecrets/{secretsJsonId}/secrets.json";
 
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
