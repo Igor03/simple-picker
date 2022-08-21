@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 using JIgor.Projects.SimplePicker.Api.Entities;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
 using MediatR;
 using OneOf;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.AttachEventValueCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
@@ -20,8 +20,8 @@ namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Handlers
         private readonly ISimplePickerDatabaseContext _simplePickerDatabaseContext;
         private readonly IMapper _mapper;
 
-        public AttachEventValueCommandHandler(IEventValueRepository eventValueRepository, 
-            IEventRepository eventRepository, 
+        public AttachEventValueCommandHandler(IEventValueRepository eventValueRepository,
+            IEventRepository eventRepository,
             ISimplePickerDatabaseContext simplePickerDatabaseContext,
             IMapper mapper)
         {

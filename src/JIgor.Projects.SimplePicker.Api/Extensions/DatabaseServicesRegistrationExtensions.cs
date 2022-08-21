@@ -9,14 +9,14 @@ namespace JIgor.Projects.SimplePicker.Api.Extensions
 {
     internal static class DatabaseServicesRegistrationExtensions
     {
-
-        public static IServiceCollection AddDatabaseServices(this IServiceCollection services, 
+        public static IServiceCollection AddDatabaseServices(this IServiceCollection services,
             IConfiguration configuration)
         {
             return services
                 .AddSimplePickerDatabaseContext(configuration)
                 .AddRepositories();
         }
+
         private static IServiceCollection AddSimplePickerDatabaseContext(this IServiceCollection services,
             IConfiguration configuration)
         {

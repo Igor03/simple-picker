@@ -1,6 +1,6 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using OneOf;
+using System;
 using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.PickValueCommandResponses;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.Command

@@ -1,5 +1,4 @@
-﻿using System;
-using JIgor.Projects.SimplePicker.Api.Dtos;
+﻿using JIgor.Projects.SimplePicker.Api.Dtos;
 using MediatR;
 using OneOf;
 using static JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses.CreateEventCommandResponses;

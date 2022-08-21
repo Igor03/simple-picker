@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
 using JIgor.Projects.SimplePicker.Api.Database.Contracts;
 using JIgor.Projects.SimplePicker.Api.Dtos;
@@ -11,7 +8,9 @@ using JIgor.Projects.SimplePicker.Api.RequestHandlers.Queries;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using static JIgor.Projects.SimplePicker.UnitTests.RequestHandlers.RequestHandlersTestsDataSource;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.RequestHandlers
@@ -19,14 +18,13 @@ namespace JIgor.Projects.SimplePicker.UnitTests.RequestHandlers
     [TestClass]
     public class FindEventQueryHandlerTests
     {
-
         [TestMethod]
         public async Task FindEventQueryHandlerShouldReturnExpectedResult()
         {
             // Arrange
-            var eventId = (Guid) GetFindEventQueryHandlerShouldReturnExpectedResultData()[0];
-            var @event = (Event) GetFindEventQueryHandlerShouldReturnExpectedResultData()[1];
-            var eventDto = (EventDto) GetFindEventQueryHandlerShouldReturnExpectedResultData()[2];
+            var eventId = (Guid)GetFindEventQueryHandlerShouldReturnExpectedResultData()[0];
+            var @event = (Event)GetFindEventQueryHandlerShouldReturnExpectedResultData()[1];
+            var eventDto = (EventDto)GetFindEventQueryHandlerShouldReturnExpectedResultData()[2];
 
             var eventRepository = Substitute.For<IEventRepository>();
             var mapper = Substitute.For<IMapper>();

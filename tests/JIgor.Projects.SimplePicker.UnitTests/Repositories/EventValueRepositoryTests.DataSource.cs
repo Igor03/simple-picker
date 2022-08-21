@@ -1,7 +1,6 @@
-﻿using System;
+﻿using JIgor.Projects.SimplePicker.Api.Entities;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using JIgor.Projects.SimplePicker.Api.Entities;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.Repositories
 {

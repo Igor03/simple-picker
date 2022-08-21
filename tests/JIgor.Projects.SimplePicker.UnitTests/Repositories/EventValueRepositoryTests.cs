@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
-using FluentAssertions.Execution;
+﻿using FluentAssertions;
 using JIgor.Projects.SimplePicker.Api.Database.DataContexts;
 using JIgor.Projects.SimplePicker.Api.Database.Repositories;
 using JIgor.Projects.SimplePicker.Api.Entities;
@@ -12,6 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using static JIgor.Projects.SimplePicker.UnitTests.Repositories.EventValueRepositoryTests.DataSource;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.Repositories
@@ -25,7 +24,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Repositories
             // Arrange
             var initialEvents = GetAttachValuesAsyncShouldReturnExpectedResultInputData().ToList();
             var eventId = initialEvents[0].Id;
-            
+
             var eventValuesToBeAttached = new List<EventValue>()
             {
                 new EventValue(Guid.NewGuid(), eventId, "Montana", false),
@@ -37,7 +36,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Repositories
             await simplePickerDatabaseContext.Events.AddRangeAsync(initialEvents, CancellationToken.None)
                 .ConfigureAwait(false);
             _ = simplePickerDatabaseContext.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
-            
+
             var repository = new EventValueRepository(simplePickerDatabaseContext);
 
             // Act

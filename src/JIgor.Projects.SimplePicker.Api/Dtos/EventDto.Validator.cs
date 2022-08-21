@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Linq;
-using FluentValidation;
 
 namespace JIgor.Projects.SimplePicker.Api.Dtos
 {

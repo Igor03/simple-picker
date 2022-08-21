@@ -5,10 +5,10 @@ namespace JIgor.Projects.SimplePicker.Api.Dtos
 {
     public partial class EventDto
     {
-        public EventDto(string? title, 
-            string? description, 
-            DateTime startDate, 
-            DateTime dueDate, 
+        public EventDto(string? title,
+            string? description,
+            DateTime startDate,
+            DateTime dueDate,
             IEnumerable<EventValueDto>? eventValues)
         {
             Title = title;

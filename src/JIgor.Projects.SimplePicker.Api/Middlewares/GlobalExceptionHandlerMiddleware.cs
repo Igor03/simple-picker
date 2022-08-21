@@ -1,10 +1,10 @@
-﻿using System;
+﻿using JIgor.Projects.SimplePicker.Api.Commons.Classes;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using JIgor.Projects.SimplePicker.Api.Commons.Classes;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
 
 namespace JIgor.Projects.SimplePicker.Api.Middlewares
 {
@@ -39,8 +39,8 @@ namespace JIgor.Projects.SimplePicker.Api.Middlewares
             _ = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
             _ = exception ?? throw new ArgumentNullException(nameof(exception));
 
-            var error = new DefaultErrorResponse(exception.Message, 
-                _env.IsDevelopment() ? (exception.StackTrace ?? string.Empty) : string.Empty, 
+            var error = new DefaultErrorResponse(exception.Message,
+                _env.IsDevelopment() ? (exception.StackTrace ?? string.Empty) : string.Empty,
                 (int)HttpStatusCode.InternalServerError);
 
             httpContext.Response.StatusCode = error.StatusCode;

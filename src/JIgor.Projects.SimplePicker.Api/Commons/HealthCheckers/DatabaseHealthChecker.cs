@@ -1,9 +1,7 @@
-﻿using System.Numerics;
+﻿using JIgor.Projects.SimplePicker.Api.Database.Contracts;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper.Configuration;
-using JIgor.Projects.SimplePicker.Api.Database.Contracts;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace JIgor.Projects.SimplePicker.Api.Commons.HealthCheckers
 {
@@ -22,7 +20,7 @@ namespace JIgor.Projects.SimplePicker.Api.Commons.HealthCheckers
                 .ConfigureAwait(default);
 
             if (canConnect) return await Task.FromResult(HealthCheckResult.Healthy($"Successfully connected with the {_databaseContext.Database.ProviderName}"));
-            
+
             return await Task.FromResult(HealthCheckResult.Unhealthy("Cannot connect to the database"));
         }
     }

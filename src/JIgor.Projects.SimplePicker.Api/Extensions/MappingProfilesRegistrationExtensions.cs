@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace JIgor.Projects.SimplePicker.Api.Extensions
 {

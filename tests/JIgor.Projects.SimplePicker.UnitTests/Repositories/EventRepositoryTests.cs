@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using JIgor.Projects.SimplePicker.Api.Database.DataContexts;
 using JIgor.Projects.SimplePicker.Api.Database.Repositories;
@@ -12,6 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using static JIgor.Projects.SimplePicker.UnitTests.Repositories.EventRepositoryTests.DataSource;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.Repositories
@@ -132,7 +131,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Repositories
             IConfiguration configuration = default)
         {
             configuration ??= Substitute.For<IConfiguration>();
-            
+
             var options = new DbContextOptionsBuilder<SimplePickerDatabaseContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)

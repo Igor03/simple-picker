@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using JIgor.Projects.SimplePicker.Api.Dtos;
+﻿using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.RequestHandlers
 {
@@ -68,7 +68,7 @@ namespace JIgor.Projects.SimplePicker.UnitTests.RequestHandlers
                 }
             };
 
-            return new object[] {eventEntitySeed, mappedEntitySeed};
+            return new object[] { eventEntitySeed, mappedEntitySeed };
         }
 
         public static object[] GetFindEventQueryHandlerShouldReturnExpectedResultData()
@@ -100,8 +100,6 @@ namespace JIgor.Projects.SimplePicker.UnitTests.RequestHandlers
                     new EventValueDto("Brady")
                 }
             };
-
-           
 
             return new object[] { eventId, eventEntity, mappedEventEntity };
         }

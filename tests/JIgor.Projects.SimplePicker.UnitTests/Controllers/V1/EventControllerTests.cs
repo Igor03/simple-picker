@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using JIgor.Projects.SimplePicker.Api.Controllers.V1;
 using JIgor.Projects.SimplePicker.Api.Dtos;
 using JIgor.Projects.SimplePicker.Api.RequestHandlers.Command;
@@ -12,6 +8,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using static JIgor.Projects.SimplePicker.UnitTests.Controllers.V1.EventControllerTests.DataSource;
 
 namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
@@ -179,8 +179,8 @@ namespace JIgor.Projects.SimplePicker.UnitTests.Controllers.V1
             var inputValues = GetAttachEventValueShouldReturnExpectedResultInput();
 
             var mediator = Substitute.For<IMediator>();
-            mediator.Send(Arg.Is<AttachEventValueCommand>(p => p != null 
-                                                               && p.EventId == eventId 
+            mediator.Send(Arg.Is<AttachEventValueCommand>(p => p != null
+                                                               && p.EventId == eventId
                                                                && Equals(p.EventValues, inputValues)),
                     CancellationToken.None)
                 .Returns(new AttachEventValueCommandResponses.Success(eventId));

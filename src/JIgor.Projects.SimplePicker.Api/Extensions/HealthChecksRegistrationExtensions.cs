@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using JIgor.Projects.SimplePicker.Api.Commons.Classes;
+﻿using JIgor.Projects.SimplePicker.Api.Commons.Classes;
 using JIgor.Projects.SimplePicker.Api.Commons.HealthCheckers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace JIgor.Projects.SimplePicker.Api.Extensions
 {

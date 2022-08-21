@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using JIgor.Projects.SimplePicker.Api.Dtos;
+﻿using JIgor.Projects.SimplePicker.Api.Dtos;
+using System.Collections.Generic;
 
 namespace JIgor.Projects.SimplePicker.Api.RequestHandlers.RequestResponses
 {
